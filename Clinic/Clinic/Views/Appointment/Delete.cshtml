@@ -1,0 +1,68 @@
+﻿@model Clinic.Models.Appointment
+
+@{
+    ViewData["Title"] = "Cancel Appointment";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                <div class="card-header bg-danger text-white text-center py-4">
+                    <i class="fas fa-calendar-times fa-3x mb-3"></i>
+                    <h2 class="mb-0">Cancel Appointment?</h2>
+                    <p class="mb-0 mt-2 opacity-75">Are you sure you want to remove this booking from the schedule?</p>
+                </div>
+
+                <div class="card-body p-4 p-lg-5">
+                    <div class="bg-light p-4 rounded-3 mb-4 border-start border-danger border-4 shadow-sm">
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <small class="text-muted fw-bold text-uppercase d-block small">Patient</small>
+                                <span class="h5">@Html.DisplayFor(model => model.Patient.Name)</span>
+                            </div>
+                            <div class="col-6">
+                                <small class="text-muted fw-bold text-uppercase d-block small">Doctor</small>
+                                <span class="h5 text-primary">Dr. @Html.DisplayFor(model => model.Doctor.Name)</span>
+                            </div>
+                        </div>
+
+                        <hr class="my-2" />
+
+                        <div class="row">
+                            <div class="col-6">
+                                <small class="text-muted fw-bold text-uppercase d-block small">Scheduled For</small>
+                                <span class="text-dark">@Model.Date.ToString("dd/MM/yyyy")</span>
+                            </div>
+                            <div class="col-6">
+                                <small class="text-muted fw-bold text-uppercase d-block small">Notes</small>
+                                <span class="text-muted italic">@(string.IsNullOrEmpty(Model.Notes) ? "No notes" : Model.Notes)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                            <button type="submit" class="btn btn-danger btn-lg px-5 shadow-sm">
+                                <i class="fas fa-trash-alt me-2"></i> Confirm Cancellation
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-lg px-4 shadow-sm">
+                                <i class="fas fa-times me-1"></i> Keep Booking
+                            </a>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card-footer bg-white text-center py-3 border-top-0">
+                    <small class="text-muted italic"><i class="fas fa-info-circle me-1"></i> Removing this will free up the doctor's time slot.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+}

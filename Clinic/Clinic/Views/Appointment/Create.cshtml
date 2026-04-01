@@ -1,0 +1,88 @@
+﻿@model Clinic.Models.Appointment
+
+@{
+    ViewData["Title"] = "Book Appointment";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                <div class="card-header bg-primary text-white text-center py-4">
+                    <h3 class="mb-0"><i class="fas fa-calendar-plus me-2"></i> Book New Appointment</h3>
+                    <p class="mb-0 mt-2 opacity-75 small text-uppercase fw-bold">Clinic Management System</p>
+                </div>
+
+                <div class="card-body p-4 p-lg-5">
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2 small" role="alert"></div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="PatientId" class="form-label fw-bold text-muted small uppercase">
+                                    <i class="fas fa-user-injured me-1"></i> Patient Name
+                                </label>
+                                <select asp-for="PatientId" class="form-select border-0 bg-light shadow-sm py-2"
+                                        asp-items='(SelectList)ViewData["PatientId"]'>
+                                    <option value="">-- Choose Patient --</option>
+                                </select>
+                                <span asp-validation-for="PatientId" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="DoctorId" class="form-label fw-bold text-muted small uppercase">
+                                    <i class="fas fa-user-md me-1"></i> Assign Doctor
+                                </label>
+                                <select asp-for="DoctorId" class="form-select border-0 bg-light shadow-sm py-2"
+                                        asp-items='(SelectList)ViewData["DoctorId"]'>
+                                    <option value="">-- Choose Doctor --</option>
+                                </select>
+                                <span asp-validation-for="DoctorId" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <hr class="my-4 opacity-25" />
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Date" class="form-label fw-bold text-muted small uppercase">
+                                    <i class="fas fa-clock me-1"></i> Date & Time
+                                </label>
+                                <input asp-for="Date" type="datetime-local" class="form-control border-0 bg-light shadow-sm py-2" />
+                                <span asp-validation-for="Date" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Notes" class="form-label fw-bold text-muted small uppercase">
+                                    <i class="fas fa-sticky-note me-1"></i> Appointment Notes
+                                </label>
+                                <textarea asp-for="Notes" class="form-control border-0 bg-light shadow-sm py-2" rows="1" placeholder="Reason for visit..."></textarea>
+                                <span asp-validation-for="Notes" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg shadow-sm py-3 fw-bold">
+                                <i class="fas fa-check-circle me-1"></i> Confirm Appointment
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-secondary py-2 border-0">
+                                <i class="fas fa-arrow-left me-1"></i> Return to Schedule
+                            </a>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card-footer bg-light border-0 py-3 text-center">
+                    <span class="text-muted small"><i class="fas fa-info-circle me-1"></i> Data will be saved directly to the database.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

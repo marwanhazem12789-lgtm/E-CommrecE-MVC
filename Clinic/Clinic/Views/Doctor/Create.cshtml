@@ -1,0 +1,52 @@
+﻿@model Clinic.Models.Doctor
+
+@{
+    ViewData["Title"] = "Add New Doctor";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-header bg-success text-white text-center py-3">
+                    <h3 class="mb-0"><i class="fas fa-plus-circle me-2"></i> Register New Doctor</h3>
+                    <small>Fill in the information below to add a doctor to the system</small>
+                </div>
+
+                <div class="card-body p-4">
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger p-2" role="alert"></div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Name" class="form-control border-0 bg-light" placeholder="Doctor Name" />
+                            <label asp-for="Name"><i class="fas fa-user-md me-1 text-muted"></i> Full Name</label>
+                            <span asp-validation-for="Name" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-floating mb-4">
+                            <input asp-for="Specialiy" class="form-control border-0 bg-light" placeholder="Specialty" />
+                            <label asp-for="Specialiy"><i class="fas fa-stethoscope me-1 text-muted"></i> Specialty</label>
+                            <span asp-validation-for="Specialiy" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg shadow-sm">
+                                <i class="fas fa-save me-1"></i> Create Doctor
+                            </button>
+                            <a asp-action="Index" class="btn btn-link text-decoration-none text-muted mt-2">
+                                <i class="fas fa-arrow-left me-1"></i> Return to Doctors List
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

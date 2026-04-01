@@ -1,0 +1,56 @@
+﻿@model Clinic.Models.Patient
+
+@{
+    ViewData["Title"] = "Register New Patient";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-primary text-white text-center py-4">
+                    <h3 class="mb-0"><i class="fas fa-user-plus me-2"></i> Patient Registration</h3>
+                    <small class="opacity-75">Please enter the patient's personal details below</small>
+                </div>
+
+                <div class="card-body p-4 p-lg-5">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2 small" role="alert"></div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Name" class="form-control border-0 bg-light shadow-sm" placeholder="Full Name" />
+                            <label asp-for="Name"><i class="fas fa-id-card me-1 text-muted"></i> Patient Full Name</label>
+                            <span asp-validation-for="Name" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-floating mb-4">
+                            <input asp-for="Age" type="number" class="form-control border-0 bg-light shadow-sm" placeholder="Age" />
+                            <label asp-for="Age"><i class="fas fa-birthday-cake me-1 text-muted"></i> Patient Age</label>
+                            <span asp-validation-for="Age" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg shadow-sm">
+                                <i class="fas fa-save me-1"></i> Register Patient
+                            </button>
+                            <a asp-action="Index" class="btn btn-link text-decoration-none text-muted mt-2">
+                                <i class="fas fa-arrow-left me-1"></i> Cancel and Go Back
+                            </a>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card-footer bg-light border-0 py-3 text-center">
+                    <span class="text-muted small"><i class="fas fa-lock me-1"></i> Secure Data Entry</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
